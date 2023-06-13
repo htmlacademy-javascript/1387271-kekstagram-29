@@ -6,9 +6,6 @@ const checkPalindrome = (string) => {
   const totalString = string.toLowerCase().replaceAll(' ', '');
   const revString = totalString.split('');
   const reverseStr = revString.reverse().join('');
-
-  //const reverseString = totalString.split('').reverse().join('');
-
   return totalString === reverseStr;
 };
 //проверка 1 функции
