@@ -41,7 +41,7 @@ const createMessage = ()=>{
   }
   return `${getRandomArrElement(MESSAGE)}${getRandomArrElement(MESSAGE) }`;
 };
-// конструктор создания сообщения для комментария
+// конструктор  комментария
 const createComments = () =>({
   id:getRandomInteger(1,1000),
   avatar:`img/avatar-${getRandomInteger(1,6)}.svg`,
