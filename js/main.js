@@ -1,4 +1,5 @@
 //константы
+const PHOTO_COUNT = 25;
 const NAMES = [
   'Алексей',
   'Василий',
@@ -28,36 +29,36 @@ const getRandomInteger = (x, y) => {
 };
 
 //поиск случайного элемента в переданном массиве
-const getRandomArrElement = (elements)=> {
-return elements[getRandomInteger(0, elements.length-1)];
+const getRandomArrElement = (elements) => {
+  return elements[getRandomInteger(0, elements.length-1)]
 };
 // конструктор создания сообщения для комментария
 const createMessage = ()=>{
+  //const str1 = getRandomArrElement(MESSAGE);
+  //const str2 = getRandomArrElement(MESSAGE);
   if(getRandomInteger(1,2) === 1){
     return getRandomArrElement(MESSAGE);
-  return getRandomArrElement(MESSAGE) +'\n'+getRandomArrElement(MESSAGE)};
+  }
+  return `${getRandomArrElement(MESSAGE)}${getRandomArrElement(MESSAGE) }`;
 };
 // конструктор создания сообщения для комментария
-const createComments = () => {
-return {
+const createComments = () =>({
   id:getRandomInteger(1,1000),
-  avatar:'img/avatar-'+getRandomInteger(1,6)+'.svg',
+  avatar:`img/avatar-${getRandomInteger(1,6)}.svg`,
   messages:createMessage(),
   name:getRandomArrElement(NAMES),
-};
-};
+});
+
 
 //конструктор объекта фотографии
-const createPhoto = ()=> {
-return{
-id:getRandomInteger(1,25),
-url:'/lib/photos/'+getRandomInteger(1,25)+'.jpg',
-description:getRandomArrElement(description),
-likes:getRandomInteger(15,200),
-comments:Array.from({length:getRandomInteger(1,30)},createComments)
-};
-};
+const createPhoto = (id)=> ({
+  id:++id,
+  url:`/photos/photos/${id}.jpg`,
+  description:getRandomArrElement(DESCRIPTION),
+  likes:getRandomInteger(15,200),
+  comments:Array.from({length:getRandomInteger(1,30)},createComments)});
 
 //создаем массив фото
-const listArrayofPhoto = Array.from({length:25},createPhoto);
-console.log(listArrayofPhoto);
+const listArrayofPhoto = Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
+
+//console.log(listArrayofPhoto);
