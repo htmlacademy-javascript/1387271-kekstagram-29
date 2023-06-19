@@ -61,4 +61,3 @@ const createPhoto = (id)=> ({
 //создаем массив фото
 const listArrayofPhoto = Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
 
-//console.log(listArrayofPhoto);
