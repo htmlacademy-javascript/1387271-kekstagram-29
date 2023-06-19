@@ -29,9 +29,8 @@ const getRandomInteger = (x, y) => {
 };
 
 //поиск случайного элемента в переданном массиве
-const getRandomArrElement = (elements) => {
-  return elements[getRandomInteger(0, elements.length-1)]
-};
+const getRandomArrElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
 // конструктор создания сообщения для комментария
 const createMessage = ()=>{
   //const str1 = getRandomArrElement(MESSAGE);
@@ -60,4 +59,4 @@ const createPhoto = (id)=> ({
 
 //создаем массив фото
 const listArrayofPhoto = Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
-
+//console.log(listArrayofPhoto);
