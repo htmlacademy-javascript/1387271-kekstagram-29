@@ -57,6 +57,6 @@ const createPhoto = (id)=> ({
   likes:getRandomInteger(15,200),
   comments:Array.from({length:getRandomInteger(1,30)},createComments)});
 
-//создаем массив фото
-const listArrayofPhoto = Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
-//console.log(listArrayofPhoto);
+
+const returnArrayofPhoto = () => Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
+returnArrayofPhoto();
