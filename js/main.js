@@ -1,5 +1,7 @@
 //константы
 const PHOTO_COUNT = 25;
+const MIN_LIKE = 15;
+const MAX_LIKE = 200;
 const NAMES = [
   'Алексей',
   'Василий',
@@ -27,14 +29,21 @@ const getRandomInteger = (x, y) => {
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 };
+//генератор  уникального индентификатора
+const generatorID = () =>{
+  let lastID = 0;
+  return () => {
+    lastID += 1;
+    return lastID;
 
+  };
+};
+const generatorIDComment = generatorID();
 //поиск случайного элемента в переданном массиве
 const getRandomArrElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 // конструктор создания сообщения для комментария
 const createMessage = ()=>{
-  //const str1 = getRandomArrElement(MESSAGE);
-  //const str2 = getRandomArrElement(MESSAGE);
   if(getRandomInteger(1,2) === 1){
     return getRandomArrElement(MESSAGE);
   }
@@ -42,7 +51,7 @@ const createMessage = ()=>{
 };
 // конструктор  комментария
 const createComments = () =>({
-  id:getRandomInteger(1,1000),
+  id:generatorIDComment(),
   avatar:`img/avatar-${getRandomInteger(1,6)}.svg`,
   messages:createMessage(),
   name:getRandomArrElement(NAMES),
@@ -52,10 +61,10 @@ const createComments = () =>({
 //конструктор объекта фотографии
 const createPhoto = (id)=> ({
   id:++id,
-  url:`/photos/photos/${id}.jpg`,
+  url:`/photos/${id}.jpg`,
   description:getRandomArrElement(DESCRIPTION),
-  likes:getRandomInteger(15,200),
-  comments:Array.from({length:getRandomInteger(1,30)},createComments)});
+  likes:getRandomInteger(MIN_LIKE,MAX_LIKE),
+  comments:Array.from({length:getRandomInteger(0,30)},createComments)});
 
 
 const returnArrayofPhoto = () => Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
