@@ -8,9 +8,9 @@ const checkPalindrome = (string) => {
   const reverseStr = revString.reverse().join('');
   return totalString === reverseStr;
 };
-//проверка 1 функции
-//controlStringLenght('bcv',3);
-//checkPalindrome('njgjn');
+
+controlStringLenght('bcv',3);
+checkPalindrome('njgjn');
 
 const checkTime = (startWorkday,endWorkday,start,proceed)=>{
   const parseTime = (time)=> {
