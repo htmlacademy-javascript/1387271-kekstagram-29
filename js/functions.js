@@ -22,7 +22,7 @@ const checkTime = (startWorkday,endWorkday,start,proceed)=>{
   };
   return (parseTime(startWorkday) <= parseTime(start) && (parseTime(start) + proceed) <= parseTime(endWorkday));
 };
-checkTime('08:00', '17:30', '14:00', 90);
+//checkTime('08:00', '17:30', '14:00', 90);
 checkTime('8:0', '10:0', '8:0', 120);
 checkTime('08:00', '14:30', '14:00', 90);
 checkTime('8:00', '17:30', '08:00', 900);
