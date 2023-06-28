@@ -1,6 +1,2 @@
-import './util.js';
-import './functions.js';
-import './create-dom.js';
-import {returnArrayofPhoto} from './data.js';
-
-returnArrayofPhoto();
+import {returnListPhoto} from './create-dom.js';
+returnListPhoto();
