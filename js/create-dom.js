@@ -11,14 +11,14 @@ const listPhotos = returnArrayofPhoto();
 const returnListPhoto = () =>{
   //создаем фрагмент
   const listFragment = document.createDocumentFragment();
-  listPhotos.forEach((photo) =>{
+  listPhotos.forEach(({url,description,likes,comments}) =>{
     //клонируем новое фото с использованием шаблона
     const picElement = picTemplate.cloneNode(true);
     //заполняем фото данными из массива
-    picElement.querySelector('.picture__img').src = photo.url;
-    picElement.querySelector('.picture__img').alt = photo.description;
-    picElement.querySelector('.picture__likes').textContent = photo.likes;
-    picElement.querySelector('.picture__comments').textContent = photo.comments.length;
+    picElement.querySelector('.picture__img').src = url;
+    picElement.querySelector('.picture__img').alt = description;
+    picElement.querySelector('.picture__likes').textContent = likes;
+    picElement.querySelector('.picture__comments').textContent = comments.length;
     listFragment.appendChild(picElement);
 
   });
