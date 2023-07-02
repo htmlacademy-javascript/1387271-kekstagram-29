@@ -8,7 +8,7 @@ const picTemplate = document.querySelector('#picture').content.querySelector('.p
 const listPhotos = ArrayofPhoto();
 
 //функция по созданию списка фотографий
-const renderPhotos = () =>{
+const renderPosts = () =>{
   //создаем фрагмент
   const listFragment = document.createDocumentFragment();
   listPhotos.forEach(({url,description,likes,comments}) =>{
@@ -25,4 +25,4 @@ const renderPhotos = () =>{
   // добавляем в dom список из фрагмента
   picContainer.appendChild(listFragment);
 };
-export {renderPhotos};
+export {renderPosts};
