@@ -47,5 +47,5 @@ const createPhoto = (id)=> ({
   description:getRandomArrElement(DESCRIPTION),
   likes:getRandomInteger(MIN_LIKE,MAX_LIKE),
   comments:Array.from({length:getRandomInteger(MINCOM,MAXCOM)},createComments)});
-const returnArrayofPhoto = () => Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
-export {returnArrayofPhoto};
+const ArrayofPhoto = () => Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
+export {ArrayofPhoto};

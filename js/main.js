@@ -1,2 +1,2 @@
-import {returnListPhoto} from './create-dom.js';
-returnListPhoto();
+import {renderPhotos} from './create-dom.js';
+renderPhotos();

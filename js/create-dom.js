@@ -1,14 +1,14 @@
-import {returnArrayofPhoto} from './data.js';
+import {ArrayofPhoto} from './data.js';
 //список куда вставлять
 const picContainer = document.querySelector('.pictures');
 //доступ к шаблону
 const picTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-//заполняем массив данных с помощью функции  returnArrayofPhoto
-const listPhotos = returnArrayofPhoto();
+//заполняем массив данных с помощью функции  ArrayofPhoto
+const listPhotos = ArrayofPhoto();
 
 //функция по созданию списка фотографий
-const returnListPhoto = () =>{
+const renderPhotos = () =>{
   //создаем фрагмент
   const listFragment = document.createDocumentFragment();
   listPhotos.forEach(({url,description,likes,comments}) =>{
@@ -25,4 +25,4 @@ const returnListPhoto = () =>{
   // добавляем в dom список из фрагмента
   picContainer.appendChild(listFragment);
 };
-export {returnListPhoto};
+export {renderPhotos};
