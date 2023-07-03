@@ -1,7 +1,19 @@
 import {ArrayofPhoto} from './data.js';
+import{createBigPhoto,bigPhoto} from './big-photo.js';
+
+const closePhoto = document.querySelector('.big-picture__cancel');
+
+closePhoto.addEventListener('click',() => {
+  bigPhoto.classList.add('hidden');
+});
+const openModal = ()=>{
+
+  bigPhoto.classList.remove('hidden');
+};
+
 //список куда вставлять
 const picContainer = document.querySelector('.pictures');
-//доступ к шаблону
+//доступ к шаблону списка фотографий
 const picTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 //заполняем массив данных с помощью функции  ArrayofPhoto
@@ -11,18 +23,27 @@ const listPhotos = ArrayofPhoto();
 const renderPosts = () =>{
   //создаем фрагмент
   const listFragment = document.createDocumentFragment();
-  listPhotos.forEach(({url,description,likes,comments}) =>{
+  listPhotos.forEach((item) =>{
     //клонируем новое фото с использованием шаблона
     const picElement = picTemplate.cloneNode(true);
     //заполняем фото данными из массива
-    picElement.querySelector('.picture__img').src = url;
-    picElement.querySelector('.picture__img').alt = description;
-    picElement.querySelector('.picture__likes').textContent = likes;
-    picElement.querySelector('.picture__comments').textContent = comments.length;
+    picElement.querySelector('.picture__img').src = item.url;
+    picElement.querySelector('.picture__img').alt = item.description;
+    picElement.querySelector('.picture__likes').textContent = item.likes;
+    picElement.querySelector('.picture__comments').textContent = item.comments.length;
+
+    picElement.addEventListener('click', () => {
+      createBigPhoto(item);
+      openModal(picElement);
+    });
+
     listFragment.appendChild(picElement);
 
   });
   // добавляем в dom список из фрагмента
   picContainer.appendChild(listFragment);
 };
+//
+
 export {renderPosts};
+export {listPhotos};
