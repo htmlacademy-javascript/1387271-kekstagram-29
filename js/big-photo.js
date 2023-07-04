@@ -57,7 +57,6 @@ const renderComments = (comments)=>{
   commentsShown.textContent = commShown;
   commentsCount.textContent = comments.length;
   commContainer.appendChild(listFragment);
-
 };
 
 //commentsMoreElement.addEventListener('click',renderComments());
@@ -68,12 +67,6 @@ const createBigPhoto = (item) => {
   bigPhoto.querySelector('.likes-count').textContent = item.likes;
   bigPhoto.querySelector('.comments-count').textContent = item.comments.length;
   bigPhoto.querySelector('.social__caption').textContent = item.description;
-  //commContainer.comments = renderComments(item.comments);
-  //обнуляем  старую разметку
-  //формирование списка комментариев
-  //commentsMoreElement.classList.add('hidden');
-  //commentsLikecounter.classList.add('hidden');
-
 };
 // создать функцию по заполнению шаблона комментариев  и добавление в DOM
 
