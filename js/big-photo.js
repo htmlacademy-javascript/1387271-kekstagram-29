@@ -68,6 +68,7 @@ const createBigPhoto = (item) => {
   bigPhoto.querySelector('.likes-count').textContent = item.likes;
   bigPhoto.querySelector('.comments-count').textContent = item.comments.length;
   bigPhoto.querySelector('.social__caption').textContent = item.description;
+  
   //обнуляем  старую разметку
   //формирование списка комментариев
   //commentsMoreElement.classList.add('hidden');
