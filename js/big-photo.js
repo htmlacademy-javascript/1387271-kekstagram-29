@@ -68,6 +68,6 @@ const createBigPhoto = (item) => {
   bigPhoto.querySelector('.comments-count').textContent = item.comments.length;
   bigPhoto.querySelector('.social__caption').textContent = item.description;
 };
-// создать функцию по заполнению шаблона комментариев  и добавление в DOM
-
+//
+commentsMoreElement.addEventListener('click',renderComments());
 export{createBigPhoto,bigPhoto,openModal,renderComments};
