@@ -4,6 +4,21 @@ const commContainer = document.querySelector('.social__comments');
 const listFragment1 = document.createDocumentFragment();
 ////доступ к шаблону списка комментарий
 const commTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
+const closePhoto = document.querySelector('.big-picture__cancel');
+
+closePhoto.addEventListener('click',() => {
+  bigPhoto.classList.add('hidden');
+});
+document.addEventListener('keydown',(evt)=>{
+  if(evt.key === 'Escape'){
+    evt.preventDefault();
+    bigPhoto.classList.add('hidden');
+  }
+});
+const openModal = ()=>{
+  bigPhoto.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+};
 
 //функция по отображению комментария
 const renderComment = (comment)=>{
@@ -30,4 +45,4 @@ const createBigPhoto = (item) => {
 };
 // создать функцию по заполнению шаблона комментариев  и добавление в DOM
 
-export{createBigPhoto,bigPhoto};
+export{createBigPhoto,bigPhoto,openModal};
