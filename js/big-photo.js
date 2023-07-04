@@ -5,6 +5,11 @@ const listFragment1 = document.createDocumentFragment();
 ////доступ к шаблону списка комментарий
 const commTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const closePhoto = document.querySelector('.big-picture__cancel');
+// cчетчики комментариев
+const commentsMoreElement = document.querySelector('.comments-loader');
+// cчетчики комментариев
+const commentsShown = document.querySelector('.social__comment-count');
+//const commentsCount = document.querySelector('.comments-count');
 
 closePhoto.addEventListener('click',() => {
   bigPhoto.classList.add('hidden');
@@ -42,6 +47,9 @@ const createBigPhoto = (item) => {
     renderComment(com);
   });
   commContainer.appendChild(listFragment1);
+  commentsShown.classList.add('hidden');
+  commentsMoreElement.classList.add('hidden');
+
 };
 // создать функцию по заполнению шаблона комментариев  и добавление в DOM
 
