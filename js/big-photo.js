@@ -1,8 +1,7 @@
-
 const bigPhoto = document.querySelector('.big-picture');
-
 // доступ к блоку куда вставлять комментарии
-const commContainer = document.querySelector.apply('.social__comments');
+const commContainer = document.querySelector('.social__comments');
+const listFragment1 = document.createDocumentFragment();
 ////доступ к шаблону списка комментарий
 const commTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 
@@ -12,24 +11,23 @@ const renderComment = (comment)=>{
   comElement.querySelector('.social__picture').src = comment.avatar;
   comElement.querySelector('.social__picture').alt = comment.name;
   comElement.querySelector('.social__text').textContent = comment.messages;
-  commContainer.appendChild(comElement);
+  listFragment1.appendChild(comElement);
 };
 //функция по отображению большого фото с комментариями
 const createBigPhoto = (item) => {
-  const imageContainer = bigPhoto.querySelector('.big-picture__img');
-  const img = imageContainer.getElementsByTagName('img')[0];
-  img.src = item.url;
-  const likes = bigPhoto.querySelector('.likes-count');
-  likes.textContent = item.likes;
-  const comments = bigPhoto.querySelector('.comments-count');
-  comments.textContent = item.comments.length;
+  bigPhoto.querySelector('.big-picture__img img').src = item.url;
+  bigPhoto.querySelector('.big-picture__img img').alt = item.description;
+  bigPhoto.querySelector('.likes-count').textContent = item.likes;
+  bigPhoto.querySelector('.comments-count').textContent = item.comments.length;
+  bigPhoto.querySelector('.social__caption').textContent = item.description;
+  //обнуляем  старую разметку
+  commContainer.innerHTML = '';
   //формирование списка комментариев
-  item.comments.array.forEach((it) => {
-    renderComment(it);
+  item.comments.forEach((com) => {
+    renderComment(com);
   });
+  commContainer.appendChild(listFragment1);
 };
 // создать функцию по заполнению шаблона комментариев  и добавление в DOM
-
-
 
 export{createBigPhoto,bigPhoto};
