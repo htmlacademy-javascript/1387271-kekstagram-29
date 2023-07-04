@@ -59,8 +59,8 @@ const renderComments = (comments)=>{
   commContainer.appendChild(listFragment);
 
 };
-const onCommentsLoad = () =>renderComments();
-commentsMoreElement.onclick = onCommentsLoad;
+
+//commentsMoreElement.addEventListener('click',renderComments());
 //функция по отображению большого фото с комментариями
 const createBigPhoto = (item) => {
   bigPhoto.querySelector('.big-picture__img img').src = item.url;
@@ -68,7 +68,7 @@ const createBigPhoto = (item) => {
   bigPhoto.querySelector('.likes-count').textContent = item.likes;
   bigPhoto.querySelector('.comments-count').textContent = item.comments.length;
   bigPhoto.querySelector('.social__caption').textContent = item.description;
-  
+  //commContainer.comments = renderComments(item.comments);
   //обнуляем  старую разметку
   //формирование списка комментариев
   //commentsMoreElement.classList.add('hidden');
@@ -77,4 +77,4 @@ const createBigPhoto = (item) => {
 };
 // создать функцию по заполнению шаблона комментариев  и добавление в DOM
 
-export{createBigPhoto,bigPhoto,openModal};
+export{createBigPhoto,bigPhoto,openModal,renderComments};

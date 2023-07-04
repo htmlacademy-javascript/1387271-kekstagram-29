@@ -1,5 +1,5 @@
 import {ArrayofPhoto} from './data.js';
-import{createBigPhoto,bigPhoto} from './big-photo.js';
+import{createBigPhoto,bigPhoto,renderComments} from './big-photo.js';
 
 const closePhoto = document.querySelector('.big-picture__cancel');
 
