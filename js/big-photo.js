@@ -1,4 +1,4 @@
-
+// модуль по работе с  фотографией
 const bigPhoto = document.querySelector('.big-picture');
 // доступ к блоку куда вставлять комментарии
 const commContainer = document.querySelector('.social__comments');
