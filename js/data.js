@@ -33,10 +33,10 @@ const createMessage = ()=>{
 };
 // конструктор  комментария
 const createComments = () =>({
-  id:generatorIDComment(),
+  id: generatorIDComment(),
   avatar:`img/avatar-${getRandomInteger(1,6)}.svg`,
-  messages:createMessage(),
-  name:getRandomArrElement(NAMES),
+  messages: createMessage(),
+  name: getRandomArrElement(NAMES),
 });
 
 
@@ -47,5 +47,6 @@ const createPhoto = (id)=> ({
   description:getRandomArrElement(DESCRIPTION),
   likes:getRandomInteger(MIN_LIKE,MAX_LIKE),
   comments:Array.from({length:getRandomInteger(MINCOM,MAXCOM)},createComments)});
+
 const ArrayofPhoto = () => Array.from({length:PHOTO_COUNT}, (_, index)=>createPhoto(index));
 export {ArrayofPhoto};
