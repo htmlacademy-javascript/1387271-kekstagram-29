@@ -7,7 +7,6 @@ const picContainer = document.querySelector('.pictures');
 const picTemplate = document.querySelector('#picture').content.querySelector('.picture');
 //заполняем массив данных с помощью функции  ArrayofPhoto
 const listPhotos = ArrayofPhoto();
-
 //функция по созданию списка фотографий
 const renderPosts = () =>{
   //создаем фрагмент

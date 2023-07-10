@@ -1,25 +1,19 @@
 // модуль по работе с  фотографией
-const bigPhoto = document.querySelector('.big-picture');
-// доступ к блоку куда вставлять комментарии
-const commContainer = document.querySelector('.social__comments');
-////доступ к шаблону списка комментарий
+const PARTCOMMENTS = 5;//ограничение по количеству комментариев
+
+const bigPhoto = document.querySelector('.big-picture');// доступ к блоку куда вставлять комментарии
+const commContainer = document.querySelector('.social__comments');////доступ к шаблону списка комментарий
 const commTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
-//отображение,блока  загрузки дополнительной порции комментариев
-const commentsLoadButton = document.querySelector('.comments-loader');
-// cчетчики комментариев
-const commentsShownCountElement = document.querySelector('.social__comment-count');
+const commentsLoadButton = document.querySelector('.comments-loader');//отображение,блока  загрузки дополнительной порции комментариев
+const closePhotoButton = document.querySelector('.big-picture__cancel');//кнопка по закрытию фото
+const commentsShownCountElement = document.querySelector('.social__comment-count');// cчетчики комментариев
 const commentsPartCountElement = commentsShownCountElement.querySelector('.comments-part');//сколько показано комментариев
 const commentsCountElement = commentsShownCountElement.querySelector('.comments-count');//сколько всего комментариев
-//ограничение по количеству комментариев
-const PARTCOMMENTS = 5;
-//количество показанных комментариев
-//let commShown = 0;
-//const closePhoto = document.querySelector('.big-picture__cancel');
+//функция по скрытию модалки
 const hideBigPhoto = () =>{
   bigPhoto.classList.add('hidden');
   document.body.classList.remove('modal-open');
   document.removeEventListener('keydown',onDocumentKeydown);
-  //commShown = 0;
 };
 function onDocumentKeydown(evt){
   if (evt.key === 'Escape') {
@@ -27,6 +21,7 @@ function onDocumentKeydown(evt){
     hideBigPhoto();
   }
 }
+//открытие модалки
 const openModal = ()=>{
   bigPhoto.classList.remove('hidden');
   commentsShownCountElement.classList.remove('hidden');
@@ -34,8 +29,8 @@ const openModal = ()=>{
   document.body.classList.add('modal-open');
   document.addEventListener('keydown',onDocumentKeydown);
 };
-const closePhoto = document.querySelector('.big-picture__cancel');
-closePhoto.addEventListener('click',() => {
+//закрытие модалки по кнопке
+closePhotoButton.addEventListener('click',() => {
   hideBigPhoto();
 });
 

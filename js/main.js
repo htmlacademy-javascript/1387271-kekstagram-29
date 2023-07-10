@@ -1,4 +1,3 @@
-import {renderPosts} from './create-dom.js';
+import {renderPosts} from './render-posts.js';
 renderPosts();
-//import { renderBigPosts } from './big-photo.js';
-//renderBigPosts();
+
