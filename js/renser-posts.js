@@ -1,7 +1,6 @@
 //модуль по созданию галлереи фото
-
 import {ArrayofPhoto} from './data.js';
-import{createBigPhoto,openModal} from './big-photo.js';
+import{renderBigPhoto,openModal} from './big-photo.js';
 //доступ к контейнеру куда вставлять список фото
 const picContainer = document.querySelector('.pictures');
 //доступ к шаблону мини-фотографий
@@ -24,7 +23,7 @@ const renderPosts = () =>{
 
     picElement.addEventListener('click', () => {
       openModal(picElement);
-      createBigPhoto(item);
+      renderBigPhoto(item);
     });
     listFragment.appendChild(picElement);
   });
