@@ -23,12 +23,24 @@ const uploadNewPhoto = ()=>{
   //проверка комментариев
   const validateComments = (str)=>controlStringLenght(str,140);
   //проверка хэш-тегов
-
+  const hashtag = /^#[a-zа-яё0-9]{1-19}$/i;
+  const str1 = uploadForm.querySelector('.text__hashtags');
+  //const arrayHashtags = str1.split(' ');
+  //console.log(str1);
+  const validateHashtags = (str)=>{
+    const arrayHashtags = str.split(' ');
+    //console.log(arrayHashtags);
+    arrayHashtags.forEach((item) =>(hashtag.test(item)));
+  };
   pristine.addValidator(
     uploadForm.querySelector('.text__description'),
     validateComments,
-    'От 0 до 140 символов'
+    'Введите от 0 до 140 символов'
   );
+  pristine.addValidator(
+    str1,
+    validateHashtags,
+    'введён невалидный  хэш-тег');
   uploadForm.addEventListener('submit',(evt)=> {
     evt.preventDefault();
     pristine.validate();
