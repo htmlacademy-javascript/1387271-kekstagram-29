@@ -1,5 +1,5 @@
 //модуль для загрузки нового фото
-import {controlStringLenght } from './functions.js';
+import {controlStringLenght } from './util.js';
 const imgUploadInputElement = document.querySelector('.img-upload__input'); //поле загрузки нового фото
 const imgUploadElement = document.querySelector('.img-upload__overlay');//<!-- Форма редактирования изображения -->
 const uploadForm = document.querySelector('.img-upload__form');//Форма отправки данных

@@ -23,6 +23,7 @@ function onDocumentKeydown(evt){
 }
 //открытие модалки
 const openModal = ()=>{
+  //evt.preventDefault();
   bigPhoto.classList.remove('hidden');
   commentsShownCountElement.classList.remove('hidden');
   commentsCountElement.classList.remove('hidden');

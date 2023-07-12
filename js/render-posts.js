@@ -20,8 +20,9 @@ const renderPosts = () =>{
     picElement.querySelector('.picture__likes').textContent = item.likes;
     picElement.querySelector('.picture__comments').textContent = item.comments.length;
 
-    picElement.addEventListener('click', () => {
+    picElement.addEventListener('click', (evt) => {
       openModal(picElement);
+      evt.preventDefault();
       renderBigPhoto(item);
     });
     listFragment.appendChild(picElement);
