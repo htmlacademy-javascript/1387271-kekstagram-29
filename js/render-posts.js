@@ -1,5 +1,21 @@
 import {ArrayofPhoto} from './data.js';
-import{createBigPhoto,openModal} from './big-photo.js';
+import{createBigPhoto,bigPhoto} from './big-photo.js';
+
+const closePhoto = document.querySelector('.big-picture__cancel');
+
+closePhoto.addEventListener('click',() => {
+  bigPhoto.classList.add('hidden');
+});
+document.addEventListener('keydown',(evt)=>{
+  if(evt.key === 'Escape'){
+    evt.preventDefault();
+    bigPhoto.classList.add('hidden');
+  }
+});
+const openModal = ()=>{
+  bigPhoto.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+};
 //список куда вставлять
 const picContainer = document.querySelector('.pictures');
 //доступ к шаблону списка фотографий
