@@ -17,4 +17,6 @@ const generatorID = () =>{
 const generatorIDComment = generatorID();
 //поиск случайного элемента в переданном массиве
 const getRandomArrElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
-export {getRandomArrElement,generatorIDComment,getRandomInteger};
+// Функция 1  проверки длины строки
+const controlStringLenght = (str,length)=>str.length <= length;
+export {getRandomArrElement,generatorIDComment,getRandomInteger,controlStringLenght};
