@@ -1,3 +1,4 @@
+const isNumber = (value) => typeof value === 'number';
 //генератор случайного числа в диапозоне:
 const getRandomInteger = (x, y) => {
   const lower = Math.ceil(Math.min(x, y));
@@ -19,4 +20,13 @@ const generatorIDComment = generatorID();
 const getRandomArrElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 // Функция 1  проверки длины строки
 const controlStringLenght = (str,length)=>str.length <= length;
-export {getRandomArrElement,generatorIDComment,getRandomInteger,controlStringLenght};
+const mathClamp = (value, min, max) => {
+  if (value < min) {
+    value = min;
+  }
+  if (isNumber(max) && value > max) {
+    value = max;
+  }
+  return value;
+};
+export {getRandomArrElement,generatorIDComment,getRandomInteger,controlStringLenght,mathClamp};

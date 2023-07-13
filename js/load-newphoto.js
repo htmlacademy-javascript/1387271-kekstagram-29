@@ -1,4 +1,5 @@
 import {controlStringLenght } from './util.js';
+//import { resetScale } from './scale.js';
 const TAGSCOUNT = 5;
 const MAX_HASHTAG_LENGTH = 19;
 const imgUploadInputField = document.querySelector('.img-upload__input'); //поле загрузки нового фото
