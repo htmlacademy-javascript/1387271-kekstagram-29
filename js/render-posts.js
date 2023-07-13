@@ -1,29 +1,12 @@
+//модуль по созданию галлереи фото
 import {ArrayofPhoto} from './data.js';
-import{createBigPhoto,bigPhoto} from './big-photo.js';
-
-const closePhoto = document.querySelector('.big-picture__cancel');
-
-closePhoto.addEventListener('click',() => {
-  bigPhoto.classList.add('hidden');
-});
-document.addEventListener('keydown',(evt)=>{
-  if(evt.key === 'Escape'){
-    evt.preventDefault();
-    bigPhoto.classList.add('hidden');
-  }
-});
-const openModal = ()=>{
-  bigPhoto.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-};
-//список куда вставлять
+import{renderBigPhoto,openModal} from './big-photo.js';
+//доступ к контейнеру куда вставлять список фото
 const picContainer = document.querySelector('.pictures');
-//доступ к шаблону списка фотографий
+//доступ к шаблону мини-фотографий
 const picTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
 //заполняем массив данных с помощью функции  ArrayofPhoto
 const listPhotos = ArrayofPhoto();
-
 //функция по созданию списка фотографий
 const renderPosts = () =>{
   //создаем фрагмент
@@ -37,18 +20,14 @@ const renderPosts = () =>{
     picElement.querySelector('.picture__likes').textContent = item.likes;
     picElement.querySelector('.picture__comments').textContent = item.comments.length;
 
-    picElement.addEventListener('click', () => {
-      createBigPhoto(item);
+    picElement.addEventListener('click', (evt) => {
       openModal(picElement);
+      evt.preventDefault();
+      renderBigPhoto(item);
     });
-
     listFragment.appendChild(picElement);
-
   });
   // добавляем в dom список из фрагмента
   picContainer.appendChild(listFragment);
 };
-//
-
-export {renderPosts};
-export {listPhotos};
+export {renderPosts,listPhotos};
