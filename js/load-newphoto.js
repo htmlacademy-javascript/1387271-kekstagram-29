@@ -20,14 +20,9 @@ const uploadNewPhoto = ()=>{
   });
   const convertHashtagString = (str)=> str?.toLowerCase().split(' ').filter((tag) => tag !== '');
 
-
   //использование библиотеки Pristine
   //проверка хэш-тегов
-
   const validateCountHashtags = (tags) =>convertHashtagString(tags).length <= TAGSCOUNT;//проверка на количество хэштегов
-  //console.log(tags);
-  //console.log(convertHashtagString(tags));
-
   const validateRegexHashtags = (tags) =>{
     if (tags === '') {
       return true;
@@ -91,9 +86,11 @@ const uploadNewPhoto = ()=>{
     pristine.validate();
     evt.preventDefault();
   };
+  const onOpenButton = ()=>openNewPhoto();
+  const onCloseButton = ()=>hideNewPhoto();
   //изменение поля  для выбора нового фото
-  imgUploadInputField.addEventListener('change',() =>openNewPhoto());
-  closeimgButton.addEventListener('click',()=> hideNewPhoto());
+  imgUploadInputField.addEventListener('change',onOpenButton);
+  closeimgButton.addEventListener('click',onCloseButton);
   uploadForm.addEventListener('submit',onformSubmit);
 
   commentsField.addEventListener('keydown',(evt)=>{
