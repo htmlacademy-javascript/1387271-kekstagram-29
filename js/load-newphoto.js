@@ -1,4 +1,6 @@
 import {controlStringLenght } from './util.js';
+import { resetScale } from './scale.js';
+import{resetEffects} from './effect-newphoto.js';
 const TAGSCOUNT = 5;
 const MAX_HASHTAG_LENGTH = 19;
 const imgUploadInputField = document.querySelector('.img-upload__input'); //поле загрузки нового фото
@@ -68,8 +70,8 @@ const uploadNewPhoto = ()=>{
   //закрытие формы для выбора фотографии
   const hideNewPhoto = ()=>{
     uploadForm.reset();
-    //resetScale();
-    //resetEffects();
+    resetScale();
+    resetEffects();
     pristine.reset();
     imgUploadForm.classList.add('hidden');
     document.body.classList.remove('modal-open');
