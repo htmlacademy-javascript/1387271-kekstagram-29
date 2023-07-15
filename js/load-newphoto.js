@@ -85,8 +85,8 @@ const uploadNewPhoto = ()=>{
   }
 
   const onformSubmit = (evt)=>{
-    pristine.validate();
     evt.preventDefault();
+    pristine.validate();
   };
   const onOpenButton = ()=>openNewPhoto();
   const onCloseButton = ()=>hideNewPhoto();

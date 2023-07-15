@@ -46,7 +46,7 @@ const createComment = (comment)=>{
 //функция по отображению комментария
 const renderComments = (comments) => {
   let commShown = 0;
-  return function() {
+  return ()=> {
     commShown += PARTCOMMENTS;
     if(commShown >= comments.length){
       commentsLoadButton.classList.add('hidden');
