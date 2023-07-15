@@ -1,30 +1,28 @@
 import {renderPosts} from './render-posts.js';
-import { uploadNewPhoto } from './load-newphoto.js';
 import { initScaleElement } from './scale.js';
 import {setEffectsSlider} from './effect-newphoto.js';
 import { getData, sendData } from './data-api.js';
-/*setOnFormSubmit(async (data) => {
+import { hideNewPhoto,installForm,setOnFormSubmit,unblockSubmitButton} from './load-newphoto.js';
+import { showMessage } from './util.js';
+setOnFormSubmit(async (data) => {
   try {
     await sendData(data);
-    hideModal();
-    showSuccessMessage();
+    hideNewPhoto();
+  // showSuccessMessage();
   } catch {
-    showErrorMessage();
+    //showErrorMessage();
   } finally {
     unblockSubmitButton();
   }
-});*/
+});
 
 try {
   const data = await getData();
+  installForm(data);
   renderPosts(data);
-  uploadNewPhoto(data);
   initScaleElement();
   setEffectsSlider();
 } catch (err) {
-  //showAlert(err.message);
-  console.error(err);
+  showMessage('Ошибка загрузки данных!Обновите страницу.');
+  //console.error(err);
 }
-
-
-

@@ -16,105 +16,115 @@ const submitFormButton = document.querySelector('.img-upload__submit');
 const validateComments = (str)=>controlStringLenght(str,140);
 //функция преобразования строки ввода хэштегов в массив
 
-const uploadNewPhoto = ()=>{
-  //создание объекта библиотеки pristine
-  const pristine = new Pristine(uploadForm,{
-    classTo: 'img-upload__field-wrapper',
-    errorTextParent: 'img-upload__field-wrapper'
-  });
-  const convertHashtagString = (str)=> str?.toLowerCase().split(' ').filter((tag) => tag !== '');
+//создание объекта библиотеки pristine
+const pristine = new Pristine(uploadForm,{
+  classTo: 'img-upload__field-wrapper',
+  errorTextParent: 'img-upload__field-wrapper'
+});
+const convertHashtagString = (str)=> str?.toLowerCase().split(' ').filter((tag) => tag !== '');
 
-  //использование библиотеки Pristine
-  //проверка хэш-тегов
-  const validateCountHashtags = (tags) =>convertHashtagString(tags).length <= TAGSCOUNT;//проверка на количество хэштегов
-  const validateRegexHashtags = (tags) =>{
-    if (tags === '') {
-      return true;
-    }
-    const regex = new RegExp(`^#[a-zа-яё0-9]{1,${MAX_HASHTAG_LENGTH}}$`, 'i'); //рег-ное выражение
-    const convertStr = convertHashtagString(tags);
-    return convertStr.every((tag) =>(regex.test(tag)));
-  };//проверка на регулярное выражение
-  const validateUnickHashtags = (tags) =>{
-    const toLowerCase = convertHashtagString(tags).map((tag)=>tag.toLowerCase());
-    return toLowerCase.length === new Set(toLowerCase).size;
-  };
-  pristine.addValidator(
-    hashtagsField,
-    validateCountHashtags,
-    '!!!введёно неверное количество хэштегов',
-    3,
-    true);
-  pristine.addValidator(
-    hashtagsField,
-    validateRegexHashtags,
-    '!!!введён невалидный  хэштег',
-    2,
-    true);
-  pristine.addValidator(
-    hashtagsField,
-    validateUnickHashtags,
-    '!!!введён не уникальный хэштег',
-    1,
-    true);
-  //проверка комментариев
-  pristine.addValidator(
-    commentsField,
-    validateComments,
-    'Введите от 0 до 140 символов',true
-  );
-  //отрытие формы для выбора фотографии
-  const openNewPhoto = ()=>{
-    imgUploadForm.classList.remove('hidden');
-    document.body.classList.add('modal-open');
-    document.addEventListener('keydown',onDocumentKeydown);
-  };
-  //закрытие формы для выбора фотографии
-  const hideNewPhoto = ()=>{
-    uploadForm.reset();
-    resetScale();
-    resetEffects();
-    pristine.reset();
-    imgUploadForm.classList.add('hidden');
-    document.body.classList.remove('modal-open');
-    document.removeEventListener('keydown',onDocumentKeydown);
-  };
-  function onDocumentKeydown(evt){
-    if (evt.key === 'Escape') {
-      evt.preventDefault();
-      hideNewPhoto();
-    }
+//использование библиотеки Pristine
+//проверка хэш-тегов
+const validateCountHashtags = (tags) =>convertHashtagString(tags).length <= TAGSCOUNT;//проверка на количество хэштегов
+const validateRegexHashtags = (tags) =>{
+  if (tags === '') {
+    return true;
   }
+  const regex = new RegExp(`^#[a-zа-яё0-9]{1,${MAX_HASHTAG_LENGTH}}$`, 'i'); //рег-ное выражение
+  const convertStr = convertHashtagString(tags);
+  return convertStr.every((tag) =>(regex.test(tag)));
+};//проверка на регулярное выражение
+const validateUnickHashtags = (tags) =>{
+  const toLowerCase = convertHashtagString(tags).map((tag)=>tag.toLowerCase());
+  return toLowerCase.length === new Set(toLowerCase).size;
+};
+pristine.addValidator(
+  hashtagsField,
+  validateCountHashtags,
+  '!!!введёно неверное количество хэштегов',
+  3,
+  true);
+pristine.addValidator(
+  hashtagsField,
+  validateRegexHashtags,
+  '!!!введён невалидный  хэштег',
+  2,
+  true);
+pristine.addValidator(
+  hashtagsField,
+  validateUnickHashtags,
+  '!!!введён не уникальный хэштег',
+  1,
+  true);
+//проверка комментариев
+pristine.addValidator(
+  commentsField,
+  validateComments,
+  'Введите от 0 до 140 символов',true
+);
+//отрытие формы для выбора фотографии
+const openNewPhoto = ()=>{
+  imgUploadForm.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown',onDocumentKeydown);
+};
+  //закрытие формы для выбора фотографии
+const hideNewPhoto = ()=>{
+  uploadForm.reset();
+  resetScale();
+  resetEffects();
+  pristine.reset();
+  imgUploadForm.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown',onDocumentKeydown);
+};
+function onDocumentKeydown(evt){
+  if (evt.key === 'Escape') {
+    evt.preventDefault();
+    hideNewPhoto();
+  }
+}
 
-  const blockSubmitButton = () => {
-    submitFormButton.disabled = true;
-    submitFormButton.textContent = 'Отправляю данные';
-  };
+const blockSubmitButton = () => {
+  submitFormButton.disabled = true;
+  submitFormButton.textContent = 'Отправляю данные';
+};
 
-  const unblockSubmitButton = () => {
-    submitFormButton.disabled = false;
-    submitFormButton.textContent = 'Опубликовать';
-  };
-  const onformSubmit = (evt)=>{
+const unblockSubmitButton = () => {
+  submitFormButton.disabled = false;
+  submitFormButton.textContent = 'Опубликовать';
+};
+  /*const onformSubmit = (evt)=>{
     evt.preventDefault();
     pristine.validate();
-  };
-  const onOpenButton = ()=>openNewPhoto();
-  const onCloseButton = ()=>hideNewPhoto();
-
-  //const installForm=()=>{
+  };*/
+const onOpenButton = ()=>openNewPhoto();
+const onCloseButton = ()=>hideNewPhoto();
+//установка параметров формы
+const installForm = ()=>{
   //изменение поля  для выбора нового фото
-    imgUploadInputField.addEventListener('change',onOpenButton);
-    closeimgButton.addEventListener('click',onCloseButton);
-    uploadForm.addEventListener('submit',onformSubmit);
-  //};
+  imgUploadInputField.addEventListener('change',onOpenButton);
+  closeimgButton.addEventListener('click',onCloseButton);
+  pristine.addValidator(hashtagsField,
+    validateUnickHashtags,
+    '!!!введён не уникальный хэштег');
+};
   //нажатие кнопки отправыки формы
-
-  commentsField.addEventListener('keydown',(evt)=>{
-    if(evt.key === 'Escape'){
-      evt.stopPropagation();
+const setOnFormSubmit = (callback) => {
+  uploadForm.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      callback(new FormData(uploadForm));
     }
   });
 };
+commentsField.addEventListener('keydown',(evt)=>{
+  if(evt.key === 'Escape'){
+    evt.stopPropagation();
+  }
+});
 
-export {uploadNewPhoto};
+
+export {installForm,setOnFormSubmit,unblockSubmitButton,hideNewPhoto};
