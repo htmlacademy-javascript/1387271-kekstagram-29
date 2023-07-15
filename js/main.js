@@ -18,7 +18,7 @@ import { getData, sendData } from './data-api.js';
 try {
   const data = await getData();
   renderPosts(data);
-  uploadNewPhoto();
+  uploadNewPhoto(data);
   initScaleElement();
   setEffectsSlider();
 } catch (err) {

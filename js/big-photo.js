@@ -40,7 +40,7 @@ const createComment = (comment)=>{
   const comElement = commTemplate.cloneNode(true);
   comElement.querySelector('.social__picture').src = comment.avatar;
   comElement.querySelector('.social__picture').alt = comment.name;
-  comElement.querySelector('.social__text').textContent = comment.messages;
+  comElement.querySelector('.social__text').textContent = comment.message;
   return comElement;
 };
 //функция по отображению комментария

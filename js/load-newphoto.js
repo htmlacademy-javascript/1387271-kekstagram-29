@@ -3,12 +3,14 @@ import { resetScale } from './scale.js';
 import{resetEffects} from './effect-newphoto.js';
 const TAGSCOUNT = 5;
 const MAX_HASHTAG_LENGTH = 19;
+
 const imgUploadInputField = document.querySelector('.img-upload__input'); //поле загрузки нового фото
 const imgUploadForm = document.querySelector('.img-upload__overlay');//<!-- Форма редактирования изображения -->
 const uploadForm = document.querySelector('.img-upload__form');//Форма отправки данных
 const closeimgButton = document.querySelector('.img-upload__cancel');
 const commentsField = uploadForm.querySelector('.text__description');
 const hashtagsField = uploadForm.querySelector('.text__hashtags');
+const submitFormButton = document.querySelector('.img-upload__submit');
 
 //функция по проверке длины комментариев
 const validateComments = (str)=>controlStringLenght(str,140);
@@ -84,16 +86,29 @@ const uploadNewPhoto = ()=>{
     }
   }
 
+  const blockSubmitButton = () => {
+    submitFormButton.disabled = true;
+    submitFormButton.textContent = 'Отправляю данные';
+  };
+
+  const unblockSubmitButton = () => {
+    submitFormButton.disabled = false;
+    submitFormButton.textContent = 'Опубликовать';
+  };
   const onformSubmit = (evt)=>{
     evt.preventDefault();
     pristine.validate();
   };
   const onOpenButton = ()=>openNewPhoto();
   const onCloseButton = ()=>hideNewPhoto();
+
+  //const installForm=()=>{
   //изменение поля  для выбора нового фото
-  imgUploadInputField.addEventListener('change',onOpenButton);
-  closeimgButton.addEventListener('click',onCloseButton);
-  uploadForm.addEventListener('submit',onformSubmit);
+    imgUploadInputField.addEventListener('change',onOpenButton);
+    closeimgButton.addEventListener('click',onCloseButton);
+    uploadForm.addEventListener('submit',onformSubmit);
+  //};
+  //нажатие кнопки отправыки формы
 
   commentsField.addEventListener('keydown',(evt)=>{
     if(evt.key === 'Escape'){
@@ -101,4 +116,5 @@ const uploadNewPhoto = ()=>{
     }
   });
 };
+
 export {uploadNewPhoto};
