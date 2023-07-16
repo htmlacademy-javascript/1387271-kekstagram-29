@@ -23,6 +23,6 @@ try {
   initScaleElement();
   setEffectsSlider();
 } catch (err) {
-  showMessage('Ошибка загрузки данных!Обновите страницу.');
+  showMessage(err.message);
   //console.error(err);
 }

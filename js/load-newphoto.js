@@ -87,7 +87,7 @@ function onDocumentKeydown(evt){
 
 const blockSubmitButton = () => {
   submitFormButton.disabled = true;
-  submitFormButton.textContent = 'Отправляю данные';
+  submitFormButton.textContent = 'Отправляю данные...';
 };
 
 const unblockSubmitButton = () => {
