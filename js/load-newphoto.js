@@ -94,10 +94,6 @@ const unblockSubmitButton = () => {
   submitFormButton.disabled = false;
   submitFormButton.textContent = 'Опубликовать';
 };
-  /*const onformSubmit = (evt)=>{
-    evt.preventDefault();
-    pristine.validate();
-  };*/
 const onOpenButton = ()=>openNewPhoto();
 const onCloseButton = ()=>hideNewPhoto();
 //установка параметров формы
@@ -120,6 +116,7 @@ const setOnFormSubmit = (callback) => {
     }
   });
 };
+//отмена esc в момент нахождения фокуса в поле комментариев
 commentsField.addEventListener('keydown',(evt)=>{
   if(evt.key === 'Escape'){
     evt.stopPropagation();

@@ -4,14 +4,14 @@ import {setEffectsSlider} from './effect-newphoto.js';
 import { getData, sendData } from './data-api.js';
 import { hideNewPhoto,installForm,setOnFormSubmit,unblockSubmitButton} from './load-newphoto.js';
 import { showMessage } from './util.js';
-import { showSuccessMessage } from './messages.js';
+import { showSuccessMessage,showErrorMessage } from './messages.js';
 setOnFormSubmit(async (data) => {
   try {
     await sendData(data);
     hideNewPhoto();
     showSuccessMessage();
   } catch {
-    //showErrorMessage();
+    showErrorMessage();
   } finally {
     unblockSubmitButton();
   }
