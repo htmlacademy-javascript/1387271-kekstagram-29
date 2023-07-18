@@ -70,13 +70,13 @@ const openNewPhoto = ()=>{
 };
   //закрытие формы для выбора фотографии
 const hideNewPhoto = ()=>{
+  imgUploadForm.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  document.removeEventListener('keydown',onDocumentKeydown);
   uploadForm.reset();
   resetScale();
   resetEffects();
   pristine.reset();
-  imgUploadForm.classList.add('hidden');
-  document.body.classList.remove('modal-open');
-  document.removeEventListener('keydown',onDocumentKeydown);
 };
 function onDocumentKeydown(evt){
   if (evt.key === 'Escape') {
@@ -106,13 +106,13 @@ const installForm = ()=>{
     '!!!введён не уникальный хэштег');
 };
   //нажатие кнопки отправыки формы
-const setOnFormSubmit = (callback) => {
+const setOnFormSubmit = (cb) => {
   uploadForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
       blockSubmitButton();
-      callback(new FormData(uploadForm));
+      cb(new FormData(uploadForm));
     }
   });
 };
@@ -122,6 +122,4 @@ commentsField.addEventListener('keydown',(evt)=>{
     evt.stopPropagation();
   }
 });
-
-
 export {installForm,setOnFormSubmit,unblockSubmitButton,hideNewPhoto};

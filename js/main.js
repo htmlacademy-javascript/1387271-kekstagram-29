@@ -19,8 +19,9 @@ setOnFormSubmit(async (data) => {
 
 try {
   const data = await getData();
-  installForm(data);
   renderPosts(data);
+  installForm(data);
+
   initScaleElement();
   setEffectsSlider();
 } catch (err) {

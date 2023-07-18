@@ -2,38 +2,32 @@
 const successTemplate = document.querySelector('#success').content.querySelector('.success');
 const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 
-function onDocumentKeydown(evt,callback){
+function onDocumentKeydown(evt,cb){
   if (evt.key === 'Escape') {
     evt.preventDefault();
-    callback();
+    cb();
   }
 }
 //реализация показа успешной отправки сообщения
 //закрытие по нажатию на тело документа вне сообщения
 const onSuccessDocumentClick = (evt)=>{
   evt.preventDefault();
-  if (!evt.target.closest('.success__inner')){
+
+  if (!evt.target.closest('.success__inner')) {
     closeSuccessMessage();
   }
 };
 const onSuccesButtonClick = ()=>closeSuccessMessage();//закрытие по кнопке
 const onCloseSuccessMessage = (evt)=>onDocumentKeydown(evt,closeSuccessMessage);
-
 function closeSuccessMessage (){
-  // console.log( document.body.querySelector('.success'));
   document.body.querySelector('.success').remove();
-  document.body.classList.remove('has-modal');
   document.removeEventListener('click',onSuccessDocumentClick);
   document.removeEventListener('keydown', onCloseSuccessMessage);
-
 }
-
 const showSuccessMessage = ()=>{
   const successBlock = successTemplate.cloneNode(true);
-  const successButton = successBlock.querySelector('.success__button');
   document.body.append(successBlock);
-  successButton.addEventListener('click', onSuccesButtonClick);
-  document.body.classList.remove('has-modal');
+  successBlock.querySelector('.success__button').addEventListener('click', onSuccesButtonClick);
   document.body.addEventListener('click',onSuccessDocumentClick);
   document.body.addEventListener('keydown',onCloseSuccessMessage);
 };
