@@ -1,4 +1,33 @@
-const isNumber = (value) => typeof value === 'number';
+const MESSAGE_SHOW_TIME = 5000;
+const showMessage = (message) => {
+  const messageContainer = document.createElement('div');
+  messageContainer.style.zIndex = '100';
+  messageContainer.style.position = 'absolute';
+  messageContainer.style.left = '0';
+  messageContainer.style.top = '0';
+  messageContainer.style.right = '0';
+  messageContainer.style.padding = '10px 3px';
+  messageContainer.style.fontSize = '10px';
+  messageContainer.style.textAlign = 'center';
+  messageContainer.style.backgroundColor = 'red';
+
+  messageContainer.textContent = message;
+
+  document.body.append(messageContainer);
+
+  setTimeout(() => {
+    messageContainer.remove();
+  }, MESSAGE_SHOW_TIME);
+};
+//устранение дребезга
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
 //генератор случайного числа в диапозоне:
 const getRandomInteger = (x, y) => {
   const lower = Math.ceil(Math.min(x, y));
@@ -20,13 +49,5 @@ const generatorIDComment = generatorID();
 const getRandomArrElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 // Функция 1  проверки длины строки
 const controlStringLenght = (str,length)=>str.length <= length;
-const mathClamp = (value, min, max) => {
-  if (value < min) {
-    value = min;
-  }
-  if (isNumber(max) && value > max) {
-    value = max;
-  }
-  return value;
-};
-export {getRandomArrElement,generatorIDComment,getRandomInteger,controlStringLenght,mathClamp};
+
+export {getRandomArrElement,generatorIDComment,getRandomInteger,controlStringLenght,showMessage,debounce};
