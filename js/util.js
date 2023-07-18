@@ -19,7 +19,15 @@ const showMessage = (message) => {
     messageContainer.remove();
   }, MESSAGE_SHOW_TIME);
 };
+//устранение дребезга
+const debounce = (callback, timeoutDelay = 500) => {
+  let timeoutId;
 
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
 //генератор случайного числа в диапозоне:
 const getRandomInteger = (x, y) => {
   const lower = Math.ceil(Math.min(x, y));
@@ -42,4 +50,4 @@ const getRandomArrElement = (elements) => elements[getRandomInteger(0, elements.
 // Функция 1  проверки длины строки
 const controlStringLenght = (str,length)=>str.length <= length;
 
-export {getRandomArrElement,generatorIDComment,getRandomInteger,controlStringLenght,showMessage};
+export {getRandomArrElement,generatorIDComment,getRandomInteger,controlStringLenght,showMessage,debounce};

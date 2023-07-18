@@ -21,8 +21,8 @@ const onSuccesButtonClick = ()=>closeSuccessMessage();//закрытие по к
 const onCloseSuccessMessage = (evt)=>onDocumentKeydown(evt,closeSuccessMessage);
 function closeSuccessMessage (){
   document.body.querySelector('.success').remove();
-  document.removeEventListener('click',onSuccessDocumentClick);
-  document.removeEventListener('keydown', onCloseSuccessMessage);
+  document.body.removeEventListener('click',onSuccessDocumentClick);
+  document.body.removeEventListener('keydown', onCloseSuccessMessage);
 }
 const showSuccessMessage = ()=>{
   const successBlock = successTemplate.cloneNode(true);
