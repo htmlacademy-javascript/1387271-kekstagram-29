@@ -9,6 +9,8 @@ const picTemplate = document.querySelector('#picture').content.querySelector('.p
 //const listPhotos = ArrayofPhoto();
 //функция по созданию списка фотографий
 const renderPosts = (pictures) =>{
+  //удаляем предыдущий список
+  //container.querySelectorAll('.picture').forEach((element) => element.remove());
   //создаем фрагмент
   const listFragment = document.createDocumentFragment();
   pictures.forEach((item) =>{
