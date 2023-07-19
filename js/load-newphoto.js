@@ -122,4 +122,9 @@ commentsField.addEventListener('keydown',(evt)=>{
     evt.stopPropagation();
   }
 });
+hashtagsField.addEventListener('keydown',(evt) => {
+  if(evt.key === 'Escape'){
+    evt.stopPropagation();
+  }
+});
 export {installForm,setOnFormSubmit,unblockSubmitButton,hideNewPhoto};
