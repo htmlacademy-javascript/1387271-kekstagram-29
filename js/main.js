@@ -3,9 +3,9 @@ import { initScaleElement } from './scale.js';
 import {setEffectsSlider} from './effect-newphoto.js';
 import { getData, sendData } from './data-api.js';
 import { hideNewPhoto,installForm,setOnFormSubmit,unblockSubmitButton} from './load-newphoto.js';
-import { showMessage,debounce } from './util.js';
+import { showMessage} from './util.js';
 import { showSuccessMessage,showErrorMessage } from './messages.js';
-import {setFilters,getSortedImages} from './filters.js';
+import {setDebouncedFilter, showFilters} from './filters.js';
 setOnFormSubmit(async (data) => {
   try {
     await sendData(data);
@@ -20,13 +20,12 @@ setOnFormSubmit(async (data) => {
 
 try {
   const data = await getData();
-  const debounceRenderPosts = debounce(renderPosts);
-  setFilters(data,debounceRenderPosts);
-  renderPosts(getSortedImages);
-  //renderPosts(data);
+  renderPosts(data);
   installForm(data);
   initScaleElement();
   setEffectsSlider();
+  showFilters();
+  setDebouncedFilter(data);
 } catch (err) {
   showMessage(err.message);
 }
