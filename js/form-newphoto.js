@@ -1,6 +1,7 @@
 import {controlStringLenght } from './util.js';
 import { resetScale } from './scale.js';
 import{resetEffects} from './effect-newphoto.js';
+import { initScaleElement } from './scale.js';
 const TAGSCOUNT = 5;
 const MAX_HASHTAG_LENGTH = 19;
 
@@ -67,6 +68,7 @@ const openNewPhoto = ()=>{
   imgUploadForm.classList.remove('hidden');
   document.body.classList.add('modal-open');
   document.addEventListener('keydown',onDocumentKeydown);
+  initScaleElement();
 };
   //закрытие формы для выбора фотографии
 const hideNewPhoto = ()=>{
