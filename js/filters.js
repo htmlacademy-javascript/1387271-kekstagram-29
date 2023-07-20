@@ -36,7 +36,6 @@ const setOnFilterClick = (evt, pictures) => {
 
   const filterButton = evt.target;
   filterButton.classList.add('img-filters__button--active');
-
   removePictures();
   renderPosts(sortPictures(pictures, filterButton));
 };
