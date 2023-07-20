@@ -3,11 +3,11 @@ const Method = {
   GET:'GET',
   POST:'POST',
 };
-const direction = {
+const Direction = {
   GET_DATA:'/data',
   SEND_DATA:'/',
 };
-const errorText = {
+const ErrorText = {
   GET_DATA: 'Ошибка загрузки данных!Обновите страницу.',
   SEND_DATA: 'Форма не отправлена! Отправьте повторно.',
 };
@@ -23,9 +23,9 @@ const uploadData = (route, errText, method = Method.GET, body = null) =>
       throw new Error(errText);
     });
 
-const getData = () => uploadData(direction.GET_DATA, errorText.GET_DATA);
+const getData = () => uploadData(Direction.GET_DATA, ErrorText.GET_DATA);
 
-const sendData = (body) => uploadData(direction.SEND_DATA, errorText.SEND_DATA, Method.POST, body);
+const sendData = (body) => uploadData(Direction.SEND_DATA, ErrorText.SEND_DATA, Method.POST, body);
 
 export { getData, sendData };
 

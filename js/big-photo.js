@@ -2,8 +2,8 @@
 const PARTCOMMENTS = 5;//ограничение по количеству комментариев
 
 const bigPhoto = document.querySelector('.big-picture');// доступ к блоку куда вставлять комментарии
-const commContainer = document.querySelector('.social__comments');////доступ к шаблону списка комментарий
-const commTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
+const commentsContainer = document.querySelector('.social__comments');////доступ к шаблону списка комментарий
+const commentTemplate = document.querySelector('#comment').content.querySelector('.social__comment');
 const commentsLoadButton = document.querySelector('.comments-loader');//отображение,блока  загрузки дополнительной порции комментариев
 const closePhotoButton = document.querySelector('.big-picture__cancel');//кнопка по закрытию фото
 const commentsShownCountElement = document.querySelector('.social__comment-count');// cчетчики комментариев
@@ -37,32 +37,32 @@ closePhotoButton.addEventListener('click',() => {
 
 // создание комментария
 const createComment = (comment)=>{
-  const comElement = commTemplate.cloneNode(true);
-  comElement.querySelector('.social__picture').src = comment.avatar;
-  comElement.querySelector('.social__picture').alt = comment.name;
-  comElement.querySelector('.social__text').textContent = comment.message;
-  return comElement;
+  const commentElement = commentTemplate.cloneNode(true);
+  commentElement.querySelector('.social__picture').src = comment.avatar;
+  commentElement.querySelector('.social__picture').alt = comment.name;
+  commentElement.querySelector('.social__text').textContent = comment.message;
+  return commentElement;
 };
 //функция по отображению комментария
 const renderComments = (comments) => {
-  let commShown = 0;
+  let commentShown = 0;
   return ()=> {
-    commShown += PARTCOMMENTS;
-    if(commShown >= comments.length){
+    commentShown += PARTCOMMENTS;
+    if(commentShown >= comments.length){
       commentsLoadButton.classList.add('hidden');
-      commShown = comments.length;
+      commentShown = comments.length;
     } else {
       commentsLoadButton.classList.remove('hidden');
     }
     const listFragment = document.createDocumentFragment();
-    for(let i = 0; i < commShown;i++){
+    for(let i = 0; i < commentShown;i++){
       const comment = createComment(comments[i]);
       listFragment.appendChild(comment);
     }
-    commContainer.innerHTML = '';
-    commentsPartCountElement.textContent = commShown;
+    commentsContainer.innerHTML = '';
+    commentsPartCountElement.textContent = commentShown;
     commentsCountElement.textContent = comments.length;
-    commContainer.appendChild(listFragment);
+    commentsContainer.appendChild(listFragment);
   };
 };
 //функция по отображению большого фото с комментариями
@@ -74,7 +74,7 @@ const renderBigPhoto = (item) => {
   bigPhoto.querySelector('.social__caption').textContent = item.description;
   const onCommentsLoaderClick = renderComments(item.comments);
   //заполнение комментариев
-  commContainer.comments = onCommentsLoaderClick(item.comments);
+  commentsContainer.comments = onCommentsLoaderClick(item.comments);
   commentsLoadButton.addEventListener('click',onCommentsLoaderClick);
 };
 
