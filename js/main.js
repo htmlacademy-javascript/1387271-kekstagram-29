@@ -1,5 +1,4 @@
 import {renderPosts} from './render-posts.js';
-
 import {setEffectsSlider} from './effect-newphoto.js';
 import { getData, sendData } from './data-api.js';
 import { hideNewPhoto,installForm,setOnFormSubmit,unblockSubmitButton} from './form-newphoto.js';
@@ -23,8 +22,6 @@ try {
   const data = await getData();
   renderPosts(data);
   installForm(data);
-
-  setEffectsSlider();
   showFilters();
   setPreviewPictureLoader();
   removeDebounce(data);
