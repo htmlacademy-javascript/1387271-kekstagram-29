@@ -1,7 +1,6 @@
 import {controlStringLenght } from './util.js';
-import { resetScale } from './scale.js';
-import{resetEffects,setEffectsSlider} from './effect-newphoto.js';
-import { initScaleElement } from './scale.js';
+import{resetEffects,setEffectsSlider,destroySlider} from './effect-newphoto.js';
+import { initScaleElement,resetScale } from './scale.js';
 const TAGSCOUNT = 5;
 const MAX_HASHTAG_LENGTH = 19;
 
@@ -79,6 +78,7 @@ const hideNewPhoto = ()=>{
   uploadForm.reset();
   resetScale();
   resetEffects();
+  destroySlider();
   pristine.reset();
 };
 function onDocumentKeydown(evt){
