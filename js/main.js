@@ -24,8 +24,6 @@ try {
   showFilters();
   removeDebounce(data);
   renderPosts(data);
-
-  //removeDebounce(data);
 } catch (err) {
   showMessage(err.message);
 }
