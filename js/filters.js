@@ -31,19 +31,24 @@ const sortPictures = (pictures, sortButton) => {
 const removePictures = () =>
   document.querySelectorAll('.picture').forEach((picture) => picture.remove());
 
-const setOnFilterClick = (evt, pictures) => {
-  filterButtons.forEach((button) => button.classList.remove('img-filters__button--active'));
-
-  const filterButton = evt.target;
-  filterButton.classList.add('img-filters__button--active');
+const setOnFilterClick = (filterButton, pictures) => {
   removePictures();
   renderPosts(sortPictures(pictures, filterButton));
 };
 
 const removeDebounce = (pictures) => {
-  filterForm.addEventListener('click', debounce((evt) => {
-    setOnFilterClick(evt, pictures);
-  }, TIMEOUT));
+  filterForm.addEventListener('click', (evt) => {
+    filterButtons.forEach((button) =>{
+      button.classList.remove('img-filters__button--active');
+    }
+    );
+    const filterButton = evt.target;
+    filterButton.classList.add('img-filters__button--active');
+
+    debounce(() => {
+      setOnFilterClick(filterButton, pictures);
+    }, TIMEOUT)();
+  });
 };
 
 export { removeDebounce, showFilters };
