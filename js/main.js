@@ -21,9 +21,11 @@ installForm();
 setPreviewPictureLoader();
 try {
   const data = await getData();
-  renderPosts(data);
-  removeDebounce(data);
   showFilters();
+  removeDebounce(data);
+  renderPosts(data);
+
+  //removeDebounce(data);
 } catch (err) {
   showMessage(err.message);
 }
