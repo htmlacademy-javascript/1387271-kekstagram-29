@@ -123,5 +123,10 @@ const setEffectsSlider = () => {
   sliderElement.noUiSlider.on('update', onSliderUpdate);
 
 };
+//уничтожение слайдера
+const destroySlider = ()=>{
+  sliderElement.noUiSlider.destroy();
+  effectElements.removeEventListener('change', onEffectsChange);
+};
 
-export {resetEffects, setEffectsSlider};
+export {resetEffects, setEffectsSlider,destroySlider};

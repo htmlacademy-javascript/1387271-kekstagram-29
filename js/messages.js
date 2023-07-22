@@ -5,6 +5,7 @@ const errorTemplate = document.querySelector('#error').content.querySelector('.e
 function onDocumentKeydown(evt,cb){
   if (evt.key === 'Escape') {
     evt.preventDefault();
+    evt.stopPropagation();
     cb();
   }
 }
