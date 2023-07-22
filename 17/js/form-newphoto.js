@@ -1,6 +1,9 @@
 import {controlStringLenght } from './util.js';
-import { resetScale } from './scale.js';
-import{resetEffects} from './effect-newphoto.js';
+import{resetEffects,setEffectsSlider,destroySlider} from './effect-newphoto.js';
+import { initScaleElement,resetScale } from './scale.js';
+import { showSuccessMessage,showErrorMessage } from './messages.js';
+import { sendData } from './data-api.js';
+
 const TAGSCOUNT = 5;
 const MAX_HASHTAG_LENGTH = 19;
 
@@ -62,13 +65,27 @@ pristine.addValidator(
   validateComments,
   'Введите от 0 до 140 символов',true
 );
-//отрытие формы для выбора фотографии
-const openNewPhoto = ()=>{
-  imgUploadForm.classList.remove('hidden');
-  document.body.classList.add('modal-open');
-  document.addEventListener('keydown',onDocumentKeydown);
+const blockSubmitButton = () => {
+  submitFormButton.disabled = true;
+  submitFormButton.textContent = 'Отправляю данные...';
 };
-  //закрытие формы для выбора фотографии
+const unblockSubmitButton = () => {
+  submitFormButton.disabled = false;
+  submitFormButton.textContent = 'Опубликовать';
+};
+
+//нажатие кнопки отправыки формы
+const setOnFormSubmit = (cb) => {
+  uploadForm.addEventListener('submit', async (evt) => {
+    evt.preventDefault();
+    const isValid = pristine.validate();
+    if (isValid) {
+      blockSubmitButton();
+      cb(new FormData(uploadForm));
+    }
+  });
+};
+//закрытие формы для выбора фотографии
 const hideNewPhoto = ()=>{
   imgUploadForm.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -76,8 +93,30 @@ const hideNewPhoto = ()=>{
   uploadForm.reset();
   resetScale();
   resetEffects();
+  destroySlider();
   pristine.reset();
 };
+//отрытие формы для выбора фотографии
+const openNewPhoto = ()=>{
+  imgUploadForm.classList.remove('hidden');
+  document.body.classList.add('modal-open');
+  document.addEventListener('keydown',onDocumentKeydown);
+  initScaleElement();
+  setEffectsSlider();
+  setOnFormSubmit(async (data) => {
+    try {
+      //installForm();
+      await sendData(data);
+      hideNewPhoto();
+      showSuccessMessage();
+    } catch {
+      showErrorMessage();
+    } finally {
+      unblockSubmitButton();
+    }
+  });
+};
+
 function onDocumentKeydown(evt){
   if (evt.key === 'Escape') {
     evt.preventDefault();
@@ -85,15 +124,7 @@ function onDocumentKeydown(evt){
   }
 }
 
-const blockSubmitButton = () => {
-  submitFormButton.disabled = true;
-  submitFormButton.textContent = 'Отправляю данные...';
-};
 
-const unblockSubmitButton = () => {
-  submitFormButton.disabled = false;
-  submitFormButton.textContent = 'Опубликовать';
-};
 const onOpenButton = ()=>openNewPhoto();
 const onCloseButton = ()=>hideNewPhoto();
 //установка параметров формы
@@ -105,17 +136,7 @@ const installForm = ()=>{
     validateUnickHashtags,
     '!!!введён не уникальный хэштег');
 };
-  //нажатие кнопки отправыки формы
-const setOnFormSubmit = (cb) => {
-  uploadForm.addEventListener('submit', async (evt) => {
-    evt.preventDefault();
-    const isValid = pristine.validate();
-    if (isValid) {
-      blockSubmitButton();
-      cb(new FormData(uploadForm));
-    }
-  });
-};
+
 //отмена esc в момент нахождения фокуса в поле комментариев
 commentsField.addEventListener('keydown',(evt)=>{
   if(evt.key === 'Escape'){
