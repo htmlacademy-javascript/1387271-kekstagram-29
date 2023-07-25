@@ -32,7 +32,6 @@ const showSuccessMessage = ()=>{
   document.body.addEventListener('click',onSuccessDocumentClick);
   document.body.addEventListener('keydown',onCloseSuccessMessage);
 };
-
 //реализация окна с показом ошибки
 //закрытие окна по щелчку вне области сообщения
 const onErrorDocumentClick = (evt)=>{
